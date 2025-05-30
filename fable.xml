@@ -1,0 +1,128 @@
+<!-- Arquivo principal da fabula - define configuracoes globais e estrutura -->
+<fable>
+  <!-- Configuracao global da fonte para toda a fabula -->
+  <config font-family="Poppins" />
+
+  <!-- Propriedades globais - variaveis que persistem entre paginas -->
+  <property name="pontuacao" default="0" />
+  <property name="visitante" default="Aventureiro" />
+
+  <!-- Pagina de boas-vindas com cenario da floresta -->
+  <page
+    id="welcome"
+    bg_color="#2a5d31"
+    bg_image="forest-bg.png"
+    bg_music="osts-retro-forest.mp3"
+  >
+    <!-- Titulo principal centralizado -->
+    <agent
+      id="titulo_principal"
+      x="400"
+      y="100"
+      text="Bem vindo ao CodeFab"
+      color="red"
+      font-size="32"
+      animation="slide-down"
+    />
+
+    <!-- Subtitulo com nome do visitante -->
+    <agent
+      id="subtitulo"
+      x="400"
+      y="150"
+      text="Olá, $visitante!"
+      color="red"
+      font-size="20"
+      animation="typewriter"
+    />
+
+    <!-- Elementos decorativos da floresta -->
+    <agent
+      id="arvore_esquerda"
+      x="50"
+      y="250"
+      image="forest-tree-1.png"
+      animation="slide-left"
+    />
+    <agent
+      id="arvore_direita"
+      x="650"
+      y="280"
+      image="forest-tree-2.png"
+      animation="slide-right"
+    />
+    <agent
+      id="cogumelo"
+      x="150"
+      y="420"
+      image="forest-mushroom.png"
+      animation="bounce-in hover-bounce"
+    />
+    <agent
+      id="arbusto"
+      x="600"
+      y="400"
+      image="forest-bush-1.png"
+      animation="slide-right"
+    />
+
+    <!-- Chao feito com tiles da floresta -->
+    <fab-for each="i in 0..19" index="idx">
+      <agent
+        id="tile-chao-$i"
+        x="$i * 40"
+        y="500"
+        image="forest-1.png"
+        width="40"
+        height="40"
+      />
+    </fab-for>
+
+    <!-- Segunda fileira do chao para mais consistencia -->
+    <fab-for each="i in 0..19" index="idx">
+      <agent
+        id="tile-chao2-$i"
+        x="$i * 40"
+        y="540"
+        image="forest-2.png"
+        width="40"
+        height="40"
+      />
+    </fab-for>
+
+    <!-- Botao interativo para demonstrar funcionalidade -->
+    <agent
+      id="botao_explorar"
+      x="400"
+      y="350"
+      text="Clique para explorar!"
+      color="#90ee90"
+      font-size="16"
+      animation="pulse hover-glow click-bounce"
+      on_click="set(pontuacao, $pontuacao + 1)"
+    />
+
+    <!-- Feedback interativo -->
+    <fab-if when="$pontuacao > 0">
+      <agent
+        id="feedback"
+        x="400"
+        y="300"
+        text="Você descobriu $pontuacao segredos!"
+        color="red"
+        font-size="14"
+        animation="bounce-in"
+      />
+    </fab-if>
+
+    <!-- Informacoes de ajuda -->
+    <agent
+      id="dica"
+      x="400"
+      y="450"
+      text="Use CTRL+Space para autocomplete no editor"
+      color="#e6e6fa"
+      font-size="12"
+    />
+  </page>
+</fable>
